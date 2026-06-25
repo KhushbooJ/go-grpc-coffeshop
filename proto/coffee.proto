@@ -1,0 +1,38 @@
+syntax="proto3";
+package proto;
+
+option go_package = "go-grpc-coffeshop/proto";
+
+service CoffeeShop {
+
+    rpc GetMenu(NoParam) returns (stream Menu);
+
+    rpc PlaceOrder(Order) returns (Receipt);
+
+    rpc GetOrderStatus(Receipt) returns (OrderStatus);  
+}
+
+message NoParam {}
+
+message Menu {
+  repeated Items item = 1;
+}
+
+message Items {
+  string id=1;
+  string name=2;
+}
+
+message Order {
+    repeated Items item = 1;
+
+}
+
+message Receipt {
+  string id=1;
+}
+
+message OrderStatus {
+    string order_id = 1;
+    string status = 2;
+}
